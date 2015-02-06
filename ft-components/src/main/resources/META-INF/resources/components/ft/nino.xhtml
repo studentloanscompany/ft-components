@@ -1,0 +1,38 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:ft="http://java.sun.com/jsf/composite/components/ft"
+	xmlns:ftcomp="http://slc.co.uk/jsf/ft">
+
+<composite:interface>
+	<composite:attribute name="value" type="java.lang.String"
+		required="true" />
+	<composite:attribute name="label" />
+	<composite:attribute name="labelClass" />
+	<composite:attribute name="labelEscape" default="false" />
+	<composite:attribute name="styleClass" />
+	<composite:attribute name="errorClass" default="error" />
+	<composite:attribute name="messages" />
+	<composite:attribute name="messageKey" />
+	<composite:attribute name="errorLinkAction" method-signature="void action()" />
+    <composite:attribute name="errorLinkText" />
+</composite:interface>
+
+<composite:implementation>
+	<fieldset>
+		<legend id="#{cc.attrs.id}">             
+            <h:outputText value="#{cc.attrs.label}" escape="#{cc.attrs.labelEscape}" styleClass="#{cc.attrs.labelClass}" />
+		</legend>
+		<ft:errorMessage id="NinoErrorXF" key="#{cc.attrs.messageKey}"
+			messages="#{cc.attrs.messages}" />
+		<div id="#{cc.clientId}">
+			<h:outputLabel for="nino" styleClass="visuallyhidden"
+				value="#{msgs.nationalInsuranceNumberLabel1}" />
+			<h:inputText id="nino" maxlength="9" size="10" value="#{cc.attrs.value}"/>		
+		</div>
+	</fieldset>
+
+</composite:implementation>
+</html>

@@ -1,0 +1,60 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:composite="http://java.sun.com/jsf/composite"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<composite:interface>		
+
+	</composite:interface>
+	
+	<composite:implementation>
+		<div class="progress">
+			<ol class="recursive">
+				<ui:repeat id="sections" var="j" value="#{journeyBean.journeySections}" varStatus="s">
+					<li class="#{journeyBean.cssClassFor(j)}">
+						<span class="number">#{s.index+1}</span>
+						<h:form id="sectionForm">		
+							<!--  E872 - Adding dummy hidden submit button to make HTML validator happy,conformance to WCAG 2.0 --> 			
+							<h:commandButton  id="#{cc.id}" style="display: none"/>  
+							<h:panelGroup layout="block" rendered="#{journeyBean.isLinkEnabled(j)}">
+								<h:commandLink id="sectionLink" value="#{j.sectionName}" action="#{journeyBean.checkAndNavigate(j)}"/>	
+							</h:panelGroup>
+							<h:panelGroup layout="block" rendered="#{not journeyBean.isLinkEnabled(j)}">
+								<span id="#{component.clientId}:sectionLink"><h:outputText value="#{j.sectionName}" escape="false"/></span>
+							</h:panelGroup>				
+	 					</h:form>
+					</li>								
+				</ui:repeat>
+	
+			</ol>
+		</div>
+		
+	  <h:panelGroup  id="warningPopup" layout="block">
+			<div id="#{cc.id}modalPopupJourney" class="modal-popup modal-dialog modal-warning" role="alertdialog" aria-labelledby="modal_heading">
+			   <!-- HTML validator issue: P883 [WCAG 2.0 1.3.1 (A)] Nest headings properly (H1 > H2 > H3):  so use div instead of h2-->
+			   <div class="modal_heading"><h:outputText value="#{msgs.warningPopupTitle}" escape="false" /></div>
+				       <h:panelGroup id="innerContent" layout="block" styleClass="modal-content" >	
+						<h:form id="popupForm">
+						 <h:outputText value="#{msgs.popupWarning}" escape="false" />
+							 <br/>				
+							  <h:commandButton id="Continue" value="#{msgs.continueButton}" action="#{journeyBean.continueBckNAvRequest(journeyBean.bckNavJS)}"/>                         
+	                          <h:commandButton id="Cancel" styleClass="secondary" value="#{msgs.cancelButton}" action="#{journeyBean.cancelBckNAvRequest()}"/>   
+                          </h:form>                		
+                       </h:panelGroup>                
+			</div>	
+			<h:panelGroup  id="popupContentScript"  rendered="#{journeyBean.showingWarningPoPUp}" >
+				<script>
+					$('##{cc.id}modalPopupJourney').modal({close:false,
+						containerCss: {
+					        height: 200,
+					        width: 500,
+					        position: 'absolute', 
+					        top: '0px'
+					        }
+			        });
+	            </script>
+            </h:panelGroup>
+		</h:panelGroup>			
+		
+	</composite:implementation>
+</html>

@@ -1,0 +1,70 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:ft="http://java.sun.com/jsf/composite/components/ft"
+	xmlns:ftcomp="http://slc.co.uk/jsf/ft">
+
+<composite:interface>
+	<composite:attribute name="value"
+		type="uk.co.slc.sfd.cp.ft.postcodelookup.PostcodeLookupAddress" required="true" />
+	<composite:attribute name="countryList" required="true" />		
+	<composite:attribute name="required" default="true" />
+</composite:interface>
+
+<composite:implementation>
+	<div>
+		<ft:field id="addressLine1" value="#{cc.attrs.value.addressLine1}"
+			label="#{msgs.manualAddressInputContactAddress}" maxlength="24" required="true"
+			requiredMessage="#{msgs.manualAddressInputContactAddressHouseNumberRequiredMessage}" />
+	</div>
+
+	<div>
+		<ft:field id="addressLine2" value="#{cc.attrs.value.addressLine2}"
+			label="" maxlength="24" labelClass="question visuallyhidden"  />
+	</div>
+
+	<div>
+		<ft:field id="addressLine3" value="#{cc.attrs.value.addressLine3}"
+			label="" maxlength="24" labelClass="question visuallyhidden" />
+	</div>
+
+	<div>
+		<ft:field id="townCity" value="#{cc.attrs.value.townCity}"
+			label="#{msgs.manualAddressInputContactAddressTown}" maxlength="60" required="true"
+			requiredMessage="#{msgs.manualAddressInputContactAddressTownRequiredMessage}" />
+	</div>
+
+	<div>
+		<ft:field id="county" value="#{cc.attrs.value.county}"
+			label="#{msgs.manualAddressInputContactAddressCounty}" maxlength="60" />
+	</div>	
+	<div>
+		<fieldset>
+					<legend>
+						<h:outputText value="#{msgs.manualAddressInputContactAddressPostcode}" escape="false" />
+						<h:message id="postcodeError" for="postcode" errorClass="error"></h:message>
+					</legend>
+		
+		<h:inputText id="postcode" value="#{cc.attrs.value.postcode}"
+						maxlength="8" size="12"
+						requiredMessage="#{msgs.contactAddressPostcodeRequiredMessage}" required="true">
+						<f:validator validatorId="postcodeValidatorFT" />
+						<f:attribute name="country" value="#{cc.attrs.value.country}"  />						
+						<f:converter converterId="trimWhiteSpaceConverter" />
+		</h:inputText>
+		</fieldset>
+	</div>
+	
+	<div>
+		<h:outputLabel for="country"
+			value="#{msgs.manualAddressInputContactAddressCountry}" escape="false" />
+		<h:selectOneMenu id="country" value="#{cc.attrs.value.country}" >
+			<f:selectItems value="#{cc.attrs.countryList}" />
+			<f:ajax event="change" execute="@this" render="@this" />			
+		</h:selectOneMenu>
+	</div>
+	
+</composite:implementation>
+</html>

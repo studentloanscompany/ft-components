@@ -1,0 +1,53 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ft="http://java.sun.com/jsf/composite/components/ft" >
+
+
+<composite:interface>
+
+	<composite:attribute name="value" />
+	<composite:attribute name="moreText" />
+	<composite:attribute name="lessLinkText" default="#{literal.showLess}" />
+	<composite:attribute name="moreLinkText" default="#{literal.showMore}" />
+	<composite:attribute name="styleClass" />
+	<composite:attribute name="accessibilityMessage" default="#{literal.moreLessAccessibilityMessage}"  />	
+
+</composite:interface>
+
+<composite:implementation>
+
+	<h:panelGroup layout="block" styleClass="#{cc.attrs.styleClass}">
+		<h:panelGroup layout="block" id="guidanceText">
+			<h:outputText value="#{cc.attrs.value}" escape="false" />
+		</h:panelGroup>
+
+		<h:panelGroup rendered="#{! empty cc.attrs.moreText}">
+			<div id="guidanceTextDetails" class="more">
+				<a id="#{cc.id}moreLessLink" href="javascript: void(0)">#{cc.attrs.moreLinkText}</a>
+				<span class="visuallyhidden">#{cc.attrs.accessibilityMessage}</span>
+				<div class="help_hidden" id="#{cc.id}helptext">
+					<h:outputText value="#{cc.attrs.moreText}" escape="false" />
+				</div>
+			</div>
+		</h:panelGroup>
+
+		<script type="text/javascript">		
+			//toogle the hidden div and change the link text (Show more or Show less)
+			$('##{cc.id}moreLessLink').click(
+				function(ev) {
+					$('##{cc.id}helptext').toggle();
+					$(this).html(
+	    				($('##{cc.id}moreLessLink').text() == '#{cc.attrs.moreLinkText}') ? '#{cc.attrs.lessLinkText}'
+													: '#{cc.attrs.moreLinkText}');
+					});
+		</script>
+
+	</h:panelGroup>
+
+
+</composite:implementation>
+
+</html>

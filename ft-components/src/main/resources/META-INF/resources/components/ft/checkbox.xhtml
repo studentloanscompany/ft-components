@@ -1,0 +1,27 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:ft="http://java.sun.com/jsf/composite/components/ft">
+
+<composite:interface>
+	<composite:attribute name="label" />
+	<composite:attribute name="value" />
+	<composite:attribute name="labelClass" default="checkBox-question" />
+	<composite:attribute name="styleClass" default="checkBox" />
+	<composite:attribute name="renderLabelFirst" default="false" />
+</composite:interface>
+
+<composite:implementation>
+
+    <h:outputLabel styleClass="#{cc.attrs.labelClass}" for="checkBox"
+        value="#{cc.attrs.label}" escape="false" rendered="#{cc.attrs.renderLabelFirst}" />
+	<h:selectBooleanCheckbox id="checkBox"
+		styleClass="#{cc.attrs.styleClass}" value="#{cc.attrs.value}"  />
+	<h:outputLabel styleClass="#{cc.attrs.labelClass}" for="checkBox"
+		value="#{cc.attrs.label}" escape="false" rendered="#{!cc.attrs.renderLabelFirst}" />
+
+</composite:implementation>
+
+</html>

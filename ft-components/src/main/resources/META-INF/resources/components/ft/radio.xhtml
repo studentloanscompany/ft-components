@@ -1,0 +1,44 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://slc.co.uk/jsf/core"
+	xmlns:dig="http://java.sun.com/jsf/composite/components/dig">
+
+<composite:interface>
+	<composite:attribute name="value" required="true" />
+	<composite:attribute name="label" />
+	<composite:attribute name="labelClass" />
+	<composite:attribute name="styleClass" />
+	<composite:attribute name="required" default="false" />
+	<composite:attribute name="requiredMessage" />
+	<composite:attribute name="selectItems" />
+	<composite:attribute name="disabled" default="false" />
+	<composite:attribute name="errorClass" default="error" />
+	<composite:clientBehavior name="change" event="change" targets="radio" />
+	<composite:editableValueHolder name="select" targets="radio" />
+</composite:interface>
+
+<composite:implementation>
+
+	<fieldset>
+		<legend>
+			<h:outputText styleClass="#{cc.attrs.labelClass}"
+				value="#{cc.attrs.label}" escape="false">
+				<h:message id="radioError" for="radio" escape="false"
+					errorClass="#{cc.attrs.errorClass}" />
+			</h:outputText>
+		</legend>
+		<h:selectOneRadio id="radio" layout="pageDirection"
+			required="#{cc.attrs.required}" disabled="#{cc.attrs.disabled}"
+			requiredMessage="#{cc.attrs.requiredMessage}"
+			value="#{cc.attrs.value}" styleClass="#{cc.attrs.styleClass}">
+			<f:selectItems value="#{cc.attrs.selectItems}" />
+			<composite:insertChildren />
+		</h:selectOneRadio>
+	</fieldset>
+
+</composite:implementation>
+
+</html>

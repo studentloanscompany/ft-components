@@ -1,0 +1,47 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://slc.co.uk/jsf/core"
+	xmlns:dig="http://java.sun.com/jsf/composite/components/dig">
+
+
+<composite:interface>
+	<composite:attribute name="value" required="true" />
+	<composite:attribute name="label" />
+	<composite:attribute name="labelClass" />
+	<composite:attribute name="required" />
+	<composite:attribute name="requiredMessage" />
+	<composite:attribute name="styleClass" />
+	<composite:attribute name="validatorMessage" />
+	<!-- default min-length is 11, max length is overridable-->
+	<composite:attribute name="validateRegexPattern" default="^[+ .]?([0-9 ]{11,} ?)?"/>
+	<composite:attribute name="maxLength" default="15"/>
+	<composite:attribute name="validate" default="true" />
+	<composite:clientBehavior name="change" event="change" targets="phoneNumber" />
+	<composite:editableValueHolder name="phoneNumber" targets="phoneNumber" />
+</composite:interface>
+
+<composite:implementation>
+
+	<h:outputLabel styleClass="#{cc.attrs.labelClass}" for="phoneNumber" value="#{cc.attrs.label}" >
+		<h:message id="phoneNumberError" for="phoneNumber" errorClass="error" />
+	</h:outputLabel>	
+
+	<h:inputText id="phoneNumber"
+		value="#{cc.attrs.value}"
+		required="#{cc.attrs.required}"
+		requiredMessage="#{cc.attrs.requiredMessage}" 
+		size="24"
+		validatorMessage="#{cc.attrs.validatorMessage}" 
+		maxlength="#{cc.attrs.maxLength}"
+		styleClass="#{cc.attrs.styleClass}">
+		<f:converter converterId="trimWhiteSpaceConverter" />
+ 		<f:validateLength maximum="#{cc.attrs.maxLength}" />
+		<f:validateRegex pattern="#{cc.attrs.validateRegexPattern}" disabled="#{!cc.attrs.validate}"/>		
+	</h:inputText>
+
+</composite:implementation>
+
+</html>

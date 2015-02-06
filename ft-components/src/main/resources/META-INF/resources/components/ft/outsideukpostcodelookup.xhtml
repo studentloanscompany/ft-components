@@ -1,0 +1,107 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:ft="http://java.sun.com/jsf/composite/components/ft"
+	xmlns:ftcomp="http://slc.co.uk/jsf/ft">
+
+<composite:interface componentType="components.OutsideUKPostcodeLookupComponent">
+	<composite:attribute name="value" type="uk.co.slc.sfd.cp.ft.postcodelookup.PostcodeLookupAddress" required="true"/>
+	<composite:attribute name="PostcodeLookupProvider" type="uk.co.slc.sfd.cp.ft.postcodelookup.OutsideUKPostcodeLookupProvider" required="true"/>
+	<composite:attribute name="action" method-signature="java.lang.String action()" />		
+	<composite:attribute name="required" default="true"/>	
+</composite:interface>
+
+<composite:implementation>
+	<h:panelGroup id="postcodeLookup" layout="block" styleClass="AddressLookup">
+		<h:panelGroup rendered="#{cc.searchMode}">
+			<h:outputLabel for="postcode" value="#{msgs.postcodelookup_postcode}">
+					<h:message id="postcodeError" for="postcode" errorClass="error"/>
+			</h:outputLabel>
+			<h:inputText id="postcode"  value="#{cc.attrs.value.postcode}" maxlength="8" size="14" binding="#{cc.postcode}" requiredMessage="#{msgs.contactAddressPostcodeRequiredMessage}"
+					required="true">
+				<f:attribute name="country" value="#{cc.attrs.value.country}"  />
+				<f:validator validatorId="postcodeValidatorFT" />				
+				<f:converter converterId="trimWhiteSpaceConverter" />				
+			</h:inputText>
+			
+			<br/>
+			<h:commandButton id="postcodeSearch" value="#{msgs.postcodelookup_AddressSearchButtonLabel}" action="#{cc.searchPostcodeAction}" class="navigation">
+				<f:ajax execute="postcodeLookup" render="postcodeLookup"/>
+			</h:commandButton>
+			
+			
+			<a id="toggleLink_#{cc.id}" onClick="showMoreOrLess()" href="javascript:void(0)"> 
+	    	   	<span id="morelink_#{cc.id}"><h:outputText value="#{msgs.dontKnowPostCodeShowMoreText}" escape="false"/> </span>
+	    	   	<span id="lesslink_#{cc.id}"><h:outputText value="#{msgs.dontKnowPostCodeShowLessText}" escape="false"/> </span>
+	    	</a>
+	    
+	    	<script type="text/javascript">
+					var more=true;
+					$('#lesslink_#{cc.id}').css("display","none");
+	
+					function showMoreOrLess() {
+						$('#showmore_#{cc.id}').slideToggle('100');
+						if(more) {
+							$('#morelink_#{cc.id}').css("display","none");
+							$('#lesslink_#{cc.id}').css("display","inline");
+						} else {
+							$('#morelink_#{cc.id}').css("display","inline");
+							$('#lesslink_#{cc.id}').css("display","none");
+						}
+						more=!more;
+					}	
+			</script>   
+		
+	    	<div id="showmore_#{cc.id}" class="supporting" style="display: none">
+	        	<h:outputText value="#{msgs.postcodeGuidanceText}" escape="false"/>
+	    	</div>			
+
+			<h:commandLink action="#{cc.manualEntryAction}" immediate="true" value="#{msgs.postcodelookup_PostCodeNotKnownLink}" >				
+				<f:setPropertyActionListener value="true" target="#{cc.outsideUkAddress}"/>									
+				<f:ajax execute="@this" render="postcodeLookup" />
+			</h:commandLink>
+		</h:panelGroup>		
+		<h:panelGroup  rendered="#{cc.resultsMode}">
+			<div class="searched-postcode">
+				<strong>
+					<h:outputText value="#{cc.attrs.value.postcode}" />
+				</strong>
+				<h:commandLink value="#{msgs.postcodelookup_SearchResultChange}" action="#{cc.changePostcodeAction}" >
+					<f:ajax execute="@this" render="postcodeLookup" />
+				</h:commandLink>
+			</div>			
+			<div>
+				<h:message for="address" errorClass="error"/>
+			</div>
+			<h:outputText value="#{msgs.postcodelookup_SearchResultAddressLabel}" escape="false"/>				
+			<h:selectOneMenu id="address" value="#{cc.attrs.value}" required="#{cc.attrs.required}" requiredMessage="#{msgs.postcodelookup_AddressSelectMenuDefaultText}" converter="omnifaces.SelectItemsConverter" >
+				<f:selectItem noSelectionOption="true" itemLabel="#{cc.numberAddresses} #{msgs.postcodelookup_NumberOfAddressFoundText}" />
+				<f:selectItems value="#{cc.addressSelectItems}" />
+				<f:ajax execute="@this" render="postcodeLookup" event="change" />
+			</h:selectOneMenu>
+			<br/>
+			<h:commandLink action="#{cc.manualEntryAction}" immediate="true" value="#{msgs.postcodelookup_AddressNotFoundInListText}" >
+				<f:setPropertyActionListener value="false" target="#{cc.outsideUkAddress}"/>		
+				<f:setPropertyActionListener value="UK" target="#{cc.attrs.value.country}"/>	
+				<f:ajax execute="@this" render="postcodeLookup" />
+			</h:commandLink>										
+		</h:panelGroup>
+		
+		<h:panelGroup  rendered="#{cc.manualMode}">	
+			<h:commandLink action="#{cc.changePostcodeAction}" immediate="true" value="#{msgs.postcodelookup_LookUpAddressLinkText}">
+				<f:ajax execute="@this" render="postcodeLookup" />
+			</h:commandLink>		
+			<ft:manualAddress id="manualAddress" value="#{cc.attrs.value}" countryList="#{cc.getCountries()}" 
+						outsideUkAddress="#{cc.outsideUkAddress}" postcodeRequred="#{not cc.outsideUkAddress}"/>
+		</h:panelGroup>
+		<br/>		
+		<h:commandButton id="postcodeLookupContinue" action="#{cc.attrs.action}" value="#{msgs.continueButton}"  rendered="#{! cc.searchMode}">			
+			<f:ajax execute="@form" render="@form" />			
+		</h:commandButton>	
+	</h:panelGroup>
+		
+
+</composite:implementation>
+</html>

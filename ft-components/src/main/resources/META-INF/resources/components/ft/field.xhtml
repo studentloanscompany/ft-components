@@ -1,0 +1,51 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ft="http://java.sun.com/jsf/composite/components/ft"		
+	xmlns:c="http://slc.co.uk/jsf/core">
+
+<composite:interface>
+	<composite:attribute name="value" />
+	<composite:attribute name="label" />
+	<composite:attribute name="labelClass" />
+	<composite:attribute name="styleClass" />
+	<composite:attribute name="errorClass" default="error" />
+	<composite:attribute name="maxlength" default="80" />
+	<composite:attribute name="size" default="20" />
+	<composite:attribute name="required" default="false" />
+	<composite:attribute name="requiredMessage" default="#{literal.thisFieldIsRequired}"/>
+	<composite:attribute name="validatorMessage"
+		default="VALIDATION FAILED" />
+	<composite:attribute name="converterMessage"
+		default="CONVERSION FAILED" />
+	<composite:attribute name="messages" />
+	<composite:attribute name="messageKey" default="#{cc.id}"/>	
+	<composite:clientBehavior name="change" event="change" targets="field" />
+	<composite:editableValueHolder name="field" targets="field" />
+	
+</composite:interface>
+
+<composite:implementation>
+
+	<!-- This component is accessible and has been tested with Jaws screen reader. -->
+	<div id="#{cc.attrs.id}">
+		<h:outputLabel styleClass="#{cc.attrs.labelClass}" for="field"
+			escape="false" value="#{cc.attrs.label}" />
+		<h:message id="fieldError" for="field"
+			errorClass="#{cc.attrs.errorClass}" escape="false"/>
+		<ft:errorMessage id="fieldErrorXF" key="#{cc.attrs.messageKey}" messages="#{cc.attrs.messages}"/>				
+	</div>
+
+	<composite:insertChildren />
+	<h:inputText id="field" value="#{cc.attrs.value}"
+		required="#{cc.attrs.required}"
+		requiredMessage="#{cc.attrs.requiredMessage}" size="#{cc.attrs.size}"
+		validatorMessage="#{cc.attrs.validatorMessage}"
+		converterMessage="#{cc.attrs.converterMessage}"
+		maxlength="#{cc.attrs.maxlength}" styleClass="#{cc.attrs.styleClass}"/>
+
+</composite:implementation>
+
+</html>

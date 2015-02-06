@@ -1,0 +1,40 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://slc.co.uk/jsf/core"
+	xmlns:dig="http://java.sun.com/jsf/composite/components/dig">
+
+<composite:interface>
+	<composite:attribute name="value" required="true" />
+	<composite:attribute name="label" />
+	<composite:attribute name="labelClass" />
+	<composite:attribute name="styleClass" />
+	<composite:attribute name="required" default="false" />
+	<composite:attribute name="requiredMessage" />
+	<composite:attribute name="selectItems" />
+	<composite:attribute name="disabled" />
+	<composite:attribute name="errorClass" default="error" />
+	<composite:clientBehavior name="change" event="change"
+		targets="dropdown" />
+	<composite:editableValueHolder name="select" targets="dropdown" />
+</composite:interface>
+
+<composite:implementation>
+
+	<h:outputLabel styleClass="#{cc.attrs.labelClass}" for="dropdown"
+		value="#{cc.attrs.label}" escape="false">
+		<h:message id="dropdownError" for="dropdown"
+			errorClass="#{cc.attrs.errorClass}" escape="false" />
+	</h:outputLabel>
+	<h:selectOneMenu id="dropdown" required="#{cc.attrs.required}"
+		requiredMessage="#{cc.attrs.requiredMessage}"
+		value="#{cc.attrs.value}" disabled="#{cc.attrs.disabled}">
+		<f:selectItems value="#{cc.attrs.selectItems}" />
+		<composite:insertChildren />
+	</h:selectOneMenu>
+
+</composite:implementation>
+
+</html>

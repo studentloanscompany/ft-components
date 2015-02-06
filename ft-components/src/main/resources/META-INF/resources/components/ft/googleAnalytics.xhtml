@@ -1,0 +1,52 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:slc="http://slc.co.uk/jsf/core"
+	xmlns:esi="http://slc.co.uk/esi/dummy">
+
+
+<composite:interface>
+	<composite:attribute name="toggleAnalytics" required="true" />
+	<composite:attribute name="analyticsAccount" required="true" />
+	<composite:attribute name="analyticsAccountUniversal" required="false" />
+	<composite:attribute name="domainName" required="false" />
+	<composite:attribute name="domainList" required="false" />
+	<composite:attribute name="crn" required="false" />
+</composite:interface>
+
+<composite:implementation>
+
+	<h:panelGroup rendered="#{cc.attrs.toggleAnalytics}">	
+		<script type="text/javascript">
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', '#{cc.attrs.analyticsAccount}']);
+
+			var domainName = '#{cc.attrs.domainName}';
+			if(domainName != '') {
+				_gaq.push(['_setDomainName', '#{cc.attrs.domainName}']);
+				_gaq.push(['_setAllowLinker', true]);
+			}
+
+			var universalAccount = '#{cc.attrs.analyticsAccountUniversal}'; 
+			var universalDomainList = '#{cc.attrs.domainList}';
+			var	universalUid = '#{cc.attrs.crn}';
+
+		</script>
+		<script type="text/javascript" src="../js/slc_analytics.js"/>
+			
+	</h:panelGroup>
+	
+	<h:panelGroup rendered="#{!cc.attrs.toggleAnalytics}">
+		<script type="text/javascript">
+			function trackPageView(opt_label) {
+				//do nothing!
+			}
+			function trackEvent(category, action, opt_label){
+				//do nothing!
+			}
+		</script>
+	</h:panelGroup>
+</composite:implementation>
+</html>

@@ -1,0 +1,80 @@
+<html lang="en-gb"
+    xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:composite="http://java.sun.com/jsf/composite"	
+	xmlns:ft="http://java.sun.com/jsf/composite/components/ft">
+
+
+<composite:interface>
+	<composite:attribute name="backingBean" required="true" />
+	<composite:attribute name="popupMessage" required="true" />
+	<composite:attribute name="popupWindowTime" required ="true" />
+	<composite:attribute name="popupCloseButtonLabel" default="Close"/>
+</composite:interface>
+
+<composite:implementation>
+    <h:form id="timeoutPopupForm" prependId="false">
+	   <ft:modalPopup id="timeoutPopup" ajax="false" popupTitle="#{literal.sessionTimeoutPopupHeader}">
+			<p>
+				<h:outputText value="#{cc.attrs.popupMessage}"
+					escape="false" />
+				<h:commandButton id="sessionTimeoutPopupMoreTimeButton"
+					value="#{literal.sessionTimeoutPopupMoreTimeButton}"
+					styleClass="button modal-primary simplemodal-close"
+					onclick="clearlogouttimer();"
+					action="#{cc.attrs.backingBean.keepAlive}">
+					<f:ajax render="@this" />
+				</h:commandButton>
+				<h:commandLink id="sessionTimeoutPopupLogOut" value="#{literal.sessionTimeoutPopupLogOut}"
+						class="simplemodal-close" 
+						action="#{cc.attrs.backingBean.logout}">
+				</h:commandLink>
+			</p>
+	   </ft:modalPopup>
+    </h:form>   
+			
+	<script>
+		var timeToLogout = 0;
+		$.idleTimer("#{cc.attrs.popupWindowTime}");
+		$( document ).on( "idle.idleTimer", function() {
+			    // close any existing modal popups
+			    $.modal.close();
+				$('#timeoutPopupmodalPopup').css('width', '35em');
+				$('#timeoutPopupmodalPopup').modal({close:false,
+					containerCss: {
+				        height: 400,
+				        width: 720,
+				        position: 'absolute', 
+				        top: '0px'
+				        }
+		        });
+				$('#timeoutPopupmodalPopup').css('width', 'auto');
+				$('#simplemodal-container').css('width', '35em');
+				$('#simplemodal-container').css('height', 'auto');
+				timeToLogout = window.setTimeout(function(){logout();}, "#{cc.attrs.backingBean.getExtendedTimeoutInterval()}" * 950 );
+		});
+
+		var logout = function() {
+			var exitButton = document.getElementById('timeoutPopup:timeoutPopup:sessionTimeoutPopupLogOut');
+			exitButton.click();
+		};
+
+		var clearlogouttimer = function() {
+			window.clearTimeout(timeToLogout);
+			timeToLogout = null;
+		}
+
+		// Whenever the close window link is clicked inside the timeoutPopup window, cancel the logout timer.
+		jQuery(document).ready(function($) {
+	        $('div#timeoutPopupmodalPopup a.modalCloseImg').each(function() {
+                $(this).click(function() {
+                    clearlogouttimer();
+                });
+            });
+		});
+		
+	</script>			
+</composite:implementation>
+</html>

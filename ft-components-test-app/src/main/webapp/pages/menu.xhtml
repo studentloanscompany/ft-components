@@ -1,0 +1,69 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:ft="http://java.sun.com/jsf/composite/components/ft"
+	xmlns:appft="http://java.sun.com/jsf/composite/components/appft"
+	template="/templates/template.xhtml">
+
+
+	<ui:define name="title">
+		<h:outputText value="Test Menu" escape="false" />
+	</ui:define>
+
+	<ui:define name="pageHeader">
+		<h:outputText value="Test Menu" escape="false" />
+	</ui:define>
+
+	<ui:define name="journey" />
+
+	<ui:define name="timeout" />
+
+	<ui:define name="content">
+		<h:form prependId="false">
+
+			<h:commandLink value="Test &#8249;ft:select&#8250;"
+				action="testSelect?faces-redirect=true" />
+			<br />
+			<h:commandLink value="Test &#8249;ft:postcodelookup&#8250;"
+				action="testPostcodeLookup?faces-redirect=true" />
+			<br />
+			<h:commandLink value="Test &#8249;ft:outsideUKPostcodelookup&#8250;"
+				action="testOutsideUKPostcodeLookup?faces-redirect=true" />
+			<br />		
+			<h:commandLink value="Test &#8249;ft:radio&#8250;"
+				action="testRadio?faces-redirect=true" />
+			<br />
+			<h:commandLink value="Test &#8249;ft:datePicker&#8250;"
+				action="testDatePicker?faces-redirect=true" />
+			<br />
+			<h:commandLink value="Test &#8249;ft:field&#8250;"
+				action="testField?faces-redirect=true" />
+			<br />
+			<h:commandLink value="Test &#8249;ft:textArea&#8250;"
+				action="testTextArea?faces-redirect=true" />
+			<br />
+			<h:commandLink value="Test &#8249;ft:moreLessText&#8250;"
+				action="testMoreLessText?faces-redirect=true" />
+			<br />
+			<h:commandLink value="Test &#8249;ft:toolTip&#8250;"
+				action="testToolTip?faces-redirect=true" />
+			<br />
+			<h:commandLink value="Test &#8249;ft:modalPopup&#8250;"
+				action="testModalPopup?faces-redirect=true" />
+			<br />
+			<h:commandLink value="Test &#8249;ft:infoBox&#8250;"
+				action="testInfoBox?faces-redirect=true" />
+            <br />
+            <h:commandLink value="Test &#8249;ft:nino&#8250;"
+                action="testNino?faces-redirect=true" />	
+            <br />
+            <h:commandLink value="Test &#8249;ft:timeoutPopup&#8250;"
+                action="testTimeoutPopup?faces-redirect=true" />      
+            <br />
+            <h:commandLink value="Test Aria tags"
+                action="testAria?faces-redirect=true" />                           			
+		</h:form>
+	</ui:define>
+</ui:composition>

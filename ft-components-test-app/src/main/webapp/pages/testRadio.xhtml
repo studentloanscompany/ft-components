@@ -1,0 +1,87 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:ft="http://java.sun.com/jsf/composite/components/ft"
+	xmlns:appft="http://java.sun.com/jsf/composite/components/appft"
+	template="/templates/template.xhtml">
+
+
+	<ui:define name="title">
+		<h:outputText value="Test Radio" escape="false" />
+	</ui:define>
+
+	<ui:define name="pageHeader">
+		<h:outputText value="Test Radio" escape="false" />
+	</ui:define>
+
+	<ui:define name="journey" />
+
+	<ui:define name="timeout" />
+
+	<ui:define name="content">
+		<h:form prependId="false">
+			<ft:radio id="radio1" value="#{testBean.select1}"
+				label="1. Radio with bound selectItems"
+				selectItems="#{testBean.selectItemsNoDefault}" />
+			<br />
+			<h:commandButton id="button1" value="Click me"
+				action="#{testBean.testAction}" />
+			<br />
+			<h:outputText id="value1" value="Radio value is #{testBean.select1}" />
+			<br />
+			<br />
+		</h:form>
+		<h:form prependId="false">
+			<ft:radio id="radio2" value="#{testBean.select2}"
+				label="2. Radio with inline selectItems">
+				<f:selectItem itemLabel="Inline Select 1"
+					itemValue="INLINE_SELECT_1" />
+				<f:selectItem itemLabel="Inline Select 2"
+					itemValue="INLINE_SELECT_2" />
+			</ft:radio>
+			<br />
+			<h:commandButton id="button2" value="Click me"
+				action="#{testBean.testAction}" />
+			<br />
+			<h:outputText id="value2" value="Radio value is #{testBean.select2}" />
+			<br />
+			<br />
+		</h:form>
+		<h:form prependId="false">
+			<ft:radio id="radio3" value="#{testBean.select3}"
+				label="3. Required radio" required="true"
+				selectItems="#{testBean.selectItemsNoDefault}"
+				requiredMessage="Please select a value" />
+			<br />
+			<h:commandButton id="button3" value="Click me"
+				action="#{testBean.testAction}" />
+			<br />
+			<h:outputText id="value3" value="Radio value is #{testBean.select3}" />
+			<br />
+			<br />
+		</h:form>
+		<h:form prependId="false">
+			<ft:radio id="radio4" value="#{testBean.select4}"
+				label="4. Button disabled until selection made"
+				selectItems="#{testBean.selectItemsNoDefault}">
+				<f:ajax event="change" execute="@this" render="@form" />
+			</ft:radio>
+			<br />
+			<h:commandButton id="button4" value="Click me"
+				action="#{testBean.testAction}" disabled="#{empty testBean.select4}" />
+			<br />
+			<h:outputText id="value4" value="Radio value is #{testBean.select4}" />
+			<br />
+			<br />
+		</h:form>
+		<br />
+		<br />
+		<br />
+		<h:form prependId="false">
+			<h:commandLink id="menuLink" value="Back to menu"
+				action="menu?faces-redirect=true" />
+		</h:form>
+	</ui:define>
+</ui:composition>

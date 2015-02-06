@@ -1,0 +1,57 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:ft="http://java.sun.com/jsf/composite/components/ft"
+	xmlns:ftcomp="http://slc.co.uk/jsf/ft">
+
+<composite:interface componentType="components.DatePickerComponent">
+	<composite:attribute name="value" type="java.util.Date" required="true" />
+	<composite:attribute name="fromInterval" type="java.lang.Integer" />
+	<composite:attribute name="toInterval" type="java.lang.Integer" />
+	<composite:attribute name="descending" type="java.lang.Boolean" />
+	<composite:attribute name="showDefault" type="java.lang.Boolean" />
+	<composite:attribute name="referenceYear" type="java.lang.Integer" />
+	<composite:attribute name="label" />
+	<composite:attribute name="labelClass" />
+	<composite:attribute name="labelEscape" default="false" />
+	<composite:attribute name="styleClass" />
+	<composite:attribute name="errorClass" default="error" />
+	<composite:attribute name="messages" />
+	<composite:attribute name="messageKey" />
+
+</composite:interface>
+
+<composite:implementation>
+
+	<fieldset>
+		<legend id="#{cc.attrs.id}">
+			<h:outputText styleClass="#{cc.attrs.labelClass}" for="#{cc.id}" 
+			             escape="#{cc.attrs.labelEscape}" value="#{cc.attrs.label}" />
+			<h:message id="datePickerError" for="#{cc.id}"
+				errorClass="#{cc.attrs.errorClass}" escape="false" />
+			<ft:errorMessage id="datePickerErrorXF" key="#{cc.attrs.messageKey}"
+				messages="#{cc.attrs.messages}" />
+		</legend>
+		<div id="#{cc.clientId}">
+			<h:outputLabel for="datePickerDay" styleClass="visuallyhidden"
+				value="Day" />
+			<h:selectOneMenu id="datePickerDay" binding="#{cc.dayComponent}">
+				<f:selectItems id="dayItems" />
+			</h:selectOneMenu>
+			<h:outputLabel for="datePickerMonth" styleClass="visuallyhidden"
+				value="Month" />
+			<h:selectOneMenu id="datePickerMonth" binding="#{cc.monthComponent}">
+				<f:selectItems id="monthItems" />
+			</h:selectOneMenu>
+			<h:outputLabel for="datePickerYear" styleClass="visuallyhidden"
+				value="Year" />
+			<h:selectOneMenu id="datePickerYear" binding="#{cc.yearComponent}">
+				<f:selectItems id="yearItems" />
+			</h:selectOneMenu>
+		</div>
+	</fieldset>
+
+</composite:implementation>
+</html>

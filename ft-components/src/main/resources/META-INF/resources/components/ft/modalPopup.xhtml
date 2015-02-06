@@ -1,0 +1,49 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://slc.co.uk/jsf/core">
+
+<composite:interface>
+	<composite:attribute name="linkText" />
+	<composite:attribute name="popupTitle" />
+	<composite:attribute name="popupCloseButtonLabel" />
+	<composite:attribute name="ajax" default="true" />
+</composite:interface>
+
+<composite:implementation>
+	<h:commandLink id="#{cc.id}"
+		onclick="$('##{cc.id}modalPopup').modal({
+			close:true,
+			containerCss: {
+		        height: 480,
+		        width: 720,
+		        position: 'absolute', 
+		        top: '0px'
+		        }
+			}); return #{cc.attrs.ajax}"
+		value="#{cc.attrs.linkText}" 
+		rendered="#{not empty cc.attrs.linkText}">
+		<f:setPropertyActionListener target="#{flash.showPopup}" value="true" />
+		<f:ajax execute="@this" render="popupContent" />
+	</h:commandLink>	
+			
+	<div id="#{cc.id}modalPopup" class="modal-popup modal-dialog" role="alertdialog" aria-labelledby="modal_heading">
+        <div class="modal_heading"><h2>#{cc.attrs.popupTitle}</h2></div>
+       	<h:panelGroup rendered="#{not empty cc.attrs.popupCloseButtonLabel}" >
+        	<a class="modalCloseImg ir simplemodal-close" href="javascript:void(0);" title="Close this popup">#{cc.attrs.popupCloseButtonLabel}</a>
+		</h:panelGroup>
+		<div id="#{cc.id}_iFrame" class="modal-iframe">
+			<h:panelGroup id="popupContent" layout="block" >
+				<h:panelGroup rendered="#{flash.showPopup or not cc.attrs.ajax}" >
+					<composite:insertChildren />
+				</h:panelGroup>
+			</h:panelGroup>
+		</div>
+
+	</div>
+
+</composite:implementation>
+
+</html>

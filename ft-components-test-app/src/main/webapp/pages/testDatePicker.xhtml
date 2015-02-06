@@ -1,0 +1,145 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:ft="http://java.sun.com/jsf/composite/components/ft"
+	xmlns:appft="http://java.sun.com/jsf/composite/components/appft"
+	template="/templates/template.xhtml">
+
+
+	<ui:define name="title">
+		<h:outputText value="Test Date Picker" escape="false" />
+	</ui:define>
+
+	<ui:define name="pageHeader">
+		<h:outputText value="Test Date Picker" escape="false" />
+	</ui:define>
+
+	<ui:define name="journey" />
+
+	<ui:define name="timeout" />
+
+	<ui:define name="content">
+
+		<h:form prependId="false">
+			<ft:datePicker id="date1" value="#{testBean.date1}"
+				converterMessage="Invalid date"
+				label="1. Date with default attributes" />
+			<br />
+			<h:commandButton id="button1" value="Click me"
+				action="#{testBean.testAction}" />
+			<br />
+			<h:outputText value="Date value is " />
+			<h:outputText id="value1" value="#{testBean.date1}">
+				<f:convertDateTime type="date" pattern="d/MM/yyyy" />
+			</h:outputText>
+			<br />
+			<br />
+		</h:form>
+		<h:form prependId="false">
+			<ft:datePicker id="date2" value="#{testBean.date2}" referenceYear="2013"
+				showDefault="false" label="2. Date with no default selectItem" />
+			<br />
+			<h:commandButton id="button2" value="Click me"
+				action="#{testBean.testAction}" />
+			<br />
+			<h:outputText value="Date value is " />
+			<h:outputText id="value2" value="#{testBean.date2}">
+				<f:convertDateTime type="date" pattern="d/MM/yyyy" />
+			</h:outputText>
+			<br />
+			<br />
+		</h:form>
+		<h:form prependId="false">
+			<ft:datePicker id="date3" value="#{testBean.date3}"
+				referenceYear="2013"
+				descending="false" showDefault="false"
+				label="3. Date with ascending years" />
+			<br />
+			<h:commandButton id="button3" value="Click me"
+				action="#{testBean.testAction}" />
+			<br />
+			<h:outputText value="Date value is " />
+			<h:outputText id="value3" value="#{testBean.date3}">
+				<f:convertDateTime type="date" pattern="d/MM/yyyy" />
+			</h:outputText>
+			<br />
+			<br />
+		</h:form>
+		<h:form prependId="false">
+			<ft:datePicker id="date4" value="#{testBean.date4}"
+				showDefault="false" fromInterval="3" toInterval="3"
+				label="4. Date with year limited to 3 years back and 3 years ahead" />
+			<br />
+			<h:commandButton id="button4" value="Click me"
+				action="#{testBean.testAction}" />
+			<br />
+			<h:outputText value="Date value is " />
+			<h:outputText id="value4" value="#{testBean.date4}">
+				<f:convertDateTime type="date" pattern="d/MM/yyyy" />
+			</h:outputText>
+			<br />
+			<br />
+		</h:form>
+		<h:form prependId="false">
+			<ft:datePicker id="date5" value="#{testBean.date5}"
+				referenceYear="2000" showDefault="false" fromInterval="5"
+				toInterval="0"
+				label="5. Date with year limited to 0 years back and 5 years ahead with reference year of 2000" />
+			<br />
+			<h:commandButton id="button5" value="Click me"
+				action="#{testBean.testAction}" />
+			<br />
+			<h:outputText value="Date value is " />
+			<h:outputText id="value5" value="#{testBean.date5}">
+				<f:convertDateTime type="date" pattern="d/MM/yyyy" />
+			</h:outputText>
+			<br />
+			<br />
+		</h:form>
+		<h:form prependId="false">
+			<ui:repeat id="repeat" value="#{testBean.testListObject}"
+				var="testList" varStatus="status">
+				<ft:datePicker id="date6" value="#{testList.date}"
+					converterMessage="Invalid date"
+					referenceYear="2013"
+					label="6. Date with ui:repeat #{status.index}" />
+				<br />
+				<h:outputText value="Date value is " />
+				<h:outputText id="value6" value="#{testList.date}">
+					<f:convertDateTime type="date" pattern="d/MM/yyyy" />
+				</h:outputText>
+			</ui:repeat>
+			<br />
+			<br />
+			<h:commandButton id="button6" value="Click me"
+				action="#{testBean.testAction}">
+				<f:ajax render="@form" execute="@form" />
+			</h:commandButton>
+			<br />
+		</h:form>
+		<h:form prependId="false">
+			<ft:datePicker id="date7" value="#{testBean.date7}"
+				referenceYear="2013" converterMessage="Invalid date"
+				label="7. Validate invalid date selected" />
+			<br />
+			<h:commandButton id="button7" value="Click me"
+				action="#{testBean.testAction}" />
+			<br />
+			<h:outputText value="Date value is " />
+			<h:outputText id="value7" value="#{testBean.date7}">
+				<f:convertDateTime type="date" pattern="d/MM/yyyy" />
+			</h:outputText>
+			<br />
+			<br />
+		</h:form>
+		<br />
+		<br />
+		<br />
+		<h:form prependId="false">
+			<h:commandLink id="menuLink" value="Back to menu"
+				action="menu?faces-redirect=true" />
+		</h:form>
+	</ui:define>
+</ui:composition>

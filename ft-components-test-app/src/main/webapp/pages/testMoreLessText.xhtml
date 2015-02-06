@@ -1,0 +1,63 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:ft="http://java.sun.com/jsf/composite/components/ft"
+	xmlns:appft="http://java.sun.com/jsf/composite/components/appft"
+	template="/templates/template.xhtml">
+
+
+	<ui:define name="title">
+		<h:outputText value="Test More / Less" escape="false" />
+	</ui:define>
+
+	<ui:define name="pageHeader">
+		<h:outputText value="Test More / Less" escape="false" />
+	</ui:define>
+
+	<ui:define name="journey" />
+
+	<ui:define name="timeout" />
+
+	<ui:define name="content">
+		<h:form prependId="false">
+			<h:outputText value="1. More / Less with both more and less text"
+				style="font-weight: bold" />
+			<br />
+			<ft:moreLessText id="moreLess1" value="This is some text"
+				moreText="This is more Text" />
+			<br />
+			<br />
+		</h:form>
+
+		<h:form prependId="false">
+			<h:outputText value="2. More / Less with only less text"
+				style="font-weight: bold" />
+			<br />
+			<ft:moreLessText id="moreLess2" value="This is some text" />
+			<br />
+			<br />
+		</h:form>
+
+		<h:form prependId="false">
+			<h:outputText value="3. Multiple More / Less in same form"
+				style="font-weight: bold" />
+			<br />
+			<ft:moreLessText id="moreLess3a" value="This is some text"
+				moreText="This is more Text" />
+			<br />
+			<ft:moreLessText id="moreLess3b" value="This is some text"
+				moreText="This is more Text which is a bit different" />
+			<br />
+			<br />
+		</h:form>
+		<br />
+		<br />
+		<br />
+		<h:form prependId="false">
+			<h:commandLink id="menuLink" value="Back to menu"
+				action="menu?faces-redirect=true" />
+		</h:form>
+	</ui:define>
+</ui:composition>

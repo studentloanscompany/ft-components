@@ -1,0 +1,41 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:composite="http://java.sun.com/jsf/composite"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<composite:interface>		
+
+	</composite:interface>
+	
+	<composite:implementation>		
+		
+	  <h:panelGroup  id="warningPopup" layout="block">
+			<div id="#{cc.id}modalWarningPopup" class="modal-popup modal-dialog modal-warning" role="alertdialog" aria-labelledby="modal_heading">
+			   <!-- HTML validator issue: P883 [WCAG 2.0 1.3.1 (A)] Nest headings properly (H1 > H2 > H3):  so use div instead of h2-->
+			   <div class="modal_heading"><h:outputText value="#{msgs.warningLogoutPopupTitle}" escape="false" /></div>
+				       <h:panelGroup id="innerContent" layout="block" styleClass="modal-content" >	
+						<h:form id="popupForm">
+						 <h:outputText value="#{msgs.popupLogoutWarning}" escape="false" />
+							 <br/>				
+							 <h:commandButton id="Continue" value="#{msgs.continueButton}" action="#{sessionHandlerBean.logout()}"/>                         
+	                          
+	                          <h:commandButton id="Cancel" styleClass="secondary" value="#{msgs.cancelButton}" action="#{sessionHandlerBean.cancelBckNAvRequest()}"/>
+                          </h:form>                		
+                       </h:panelGroup>                
+			</div>	
+			<h:panelGroup  id="popupContentScript"  rendered="#{sessionHandlerBean.showingWarningPoPUp}" >
+				<script>
+					$('##{cc.id}modalWarningPopup').modal({close:false,
+						containerCss: {
+					        height: 200,
+					        width: 500,
+					        position: 'absolute', 
+					        top: '0px'
+					        }
+			        });
+	            </script>
+            </h:panelGroup>
+		</h:panelGroup>			
+		
+	</composite:implementation>
+</html>

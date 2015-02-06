@@ -1,0 +1,168 @@
+/*------------SCREEN AND PRINT---------------*/
+@media screen, print {
+.holder, .holder img {
+	display: none;
+}
+.print_logo {
+	width: 900px;
+	margin: auto;
+}
+.print_logo img {
+	margin: 2em 0 0 0;
+}
+.print .col {
+	width: 46%;
+	padding: 0;
+	margin: 0;
+}
+.print .right {
+	float: right;
+}
+.print .right p {
+	margin: 1em 0 0.5em 0;
+	padding: 0;
+}
+.print .left {
+	float: left;
+}
+.print .clear {
+	clear: both;
+}
+.print .printevidence_block {
+	border: 1px solid #ccc;
+	margin: 1em 0.5em;
+	padding: 0.5em;
+}
+.print dl {
+	margin: 0px;
+	padding: 0px;
+}
+.print dl dt {
+	font-weight: bold;
+	margin: 0.5em 0em 0em 0em;
+}
+.print dl dd {
+	margin: 0em 0em 2em 0em;
+}
+.print ul {
+	font-weight: bold;
+	margin: 0.5em 0 0 0;
+}
+.print ul li {
+	font-weight: normal;
+	margin: 0.5em;
+}
+.print .print_footer {
+	border-top: 1px dotted #ccc;
+	margin: 0.25em 0 1em 0;
+	padding: 0;
+}
+.print .print address {
+	margin: 0 0 2em 2em;
+}
+}
+/*------------SCREEN ONLY----------------*/
+@media screen {
+.print {
+	margin: 2em;
+}
+.print .article {
+	width: 100%;
+}
+.print .print_logo {
+	display: none;
+}
+}
+ /*------------PRINT ONLY----------------*/ 
+@media print {
+
+body {
+	font-size: 10pt;
+	background-color: #fff;
+	margin: 0;
+	padding: 0px;
+	/*width: 511pt;*/
+	width: 100%;
+	
+}
+.print {
+	background: #fff;
+	margin: 0px;
+	padding: 0px;
+	width: 500pt;
+}
+.print .page-header {
+	border-bottom: 1px solid #ccc;
+	width: 500pt;
+
+}
+.print .article {
+	width: 500pt;
+	padding: 0px;
+	margin: 0 0 30px 0;
+}
+.print .col {
+	width:100%;
+
+}
+.print h1 {
+	font-size: 18pt;
+}
+.print h2 {
+	font-size: 16pt;
+}
+.print p {
+	font-size: 12pt;
+	line-height: 20pt;
+	font-weight: normal;
+	margin-bottom: 10pt;
+}
+.print dl {
+	padding: 0;
+	margin: 0;}
+.print dt {
+	font-size: 12pt;
+	padding: 0;
+	margin: 0;
+}
+.print dd {
+	font-size: 12pt;
+	padding: 0;
+	margin: 0;
+}
+.print ul {
+	font-size: 12pt;
+	padding: 0;
+	margin: 0 0 20pt 0;
+}
+.print li {
+	font-size: 12pt;
+}
+.print address {
+	font-size: 12pt;
+	line-height: 25pt;
+}
+.print #TopBar {
+	background-color: #fff;
+}
+.print .holder {
+	display: none;
+}
+.print .print_footer {
+	display: none;
+}
+.print input.primary {
+	display: none;
+}
+.print input.secondary {
+	display: none;
+}
+.print #footer {
+	display: none;
+}
+.print .printevidence_block {
+	border: 1px solid #ccc;
+	margin: 10pt 5pt;
+	padding:10pt 20pt;
+	width: 500pt;
+}

@@ -1,0 +1,22 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://slc.co.uk/jsf/core">
+
+
+<composite:interface>
+	<composite:attribute name="value" />
+	<composite:attribute name="styleClass" default="info info-box" />
+</composite:interface>
+
+<composite:implementation>
+
+	<h:panelGroup id="infoBox" styleClass="#{cc.attrs.styleClass}" layout="block">
+		<h:outputText value="#{cc.attrs.value}" escape="false" />
+	</h:panelGroup>
+
+</composite:implementation>
+
+</html>

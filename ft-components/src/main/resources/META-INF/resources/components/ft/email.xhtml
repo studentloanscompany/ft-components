@@ -1,0 +1,42 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://slc.co.uk/jsf/core">
+
+<composite:interface>
+	<composite:attribute name="value" required="true" />
+	<composite:attribute name="label" />
+	<composite:attribute name="labelClass" />
+	<composite:attribute name="required" default="true" />
+	<composite:attribute name="requiredMessage" />
+	<composite:attribute name="validatorMessage" />
+	<composite:attribute name="componentBinding" />
+	<composite:attribute name="errorClass" default="error" />
+	<composite:attribute name="preventPaste" default="false" />
+
+</composite:interface>
+
+<composite:implementation>
+
+	<h:outputLabel styleClass="#{cc.attrs.labelClass}" for="email"
+		value="#{cc.attrs.label}">
+		<h:message id="emailError" for="email"
+			errorClass="#{cc.attrs.errorClass}" />
+	</h:outputLabel>
+	<span onpaste="#{cc.attrs.preventPaste ? 'return false;' : ''}">
+		<h:inputText id="email" value="#{cc.attrs.value}"
+			required="#{cc.attrs.required}"
+			binding="#{cc.attrs.componentBinding}"
+			requiredMessage="#{cc.attrs.requiredMessage}" size="40"
+			validatorMessage="#{cc.attrs.validatorMessage}" maxlength="254">
+			<f:converter converterId="trimWhiteSpaceConverter" />				
+			<f:validateRegex
+				pattern="(^[_A-Za-z0-9-'\+]+(\.[_A-Za-z0-9-'\+]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[A-Za-z]{2,})$)?" />												
+		</h:inputText>
+	</span>
+
+</composite:implementation>
+
+</html>

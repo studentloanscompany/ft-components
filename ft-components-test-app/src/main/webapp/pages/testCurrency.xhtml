@@ -1,0 +1,43 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:ft="http://java.sun.com/jsf/composite/components/ft"
+	xmlns:appft="http://java.sun.com/jsf/composite/components/appft"
+	template="/templates/template.xhtml">
+
+
+	<ui:define name="title">
+		<h:outputText value="Test Select" escape="false" />
+	</ui:define>
+
+	<ui:define name="pageHeader">
+		<h:outputText value="Test Select" escape="false" />
+	</ui:define>
+
+	<ui:define name="journey" />
+
+	<ui:define name="timeout" />
+
+	<ui:define name="content">
+		<h:form prependId="false">
+			<ft:currencyField value="#{testBean.currency1}" maxlength="5" />
+			<br />
+			<h:commandButton id="button1" value="Click me"
+				action="#{testBean.testAction}" />
+			<br />
+			<h:outputText id="value1"
+				value="Select value is #{testBean.currency1}" />
+			<br />
+			<br />
+		</h:form>
+		<br />
+		<br />
+		<br />
+		<h:form prependId="false">
+			<h:commandLink id="menuLink" value="Back to menu"
+				action="menu?faces-redirect=true" />
+		</h:form>
+	</ui:define>
+</ui:composition>

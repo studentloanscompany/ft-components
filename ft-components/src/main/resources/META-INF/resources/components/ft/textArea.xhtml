@@ -1,0 +1,54 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://slc.co.uk/jsf/core"
+	xmlns:cmp="http://java.sun.com/jsf/composite/components"
+	xmlns:dig="http://java.sun.com/jsf/composite/components/dig">
+
+<composite:interface>
+	<composite:attribute name="value" />
+	<composite:attribute name="rows" />
+	<composite:attribute name="cols" />
+	<composite:attribute name="label" />
+	<composite:attribute name="labelClass" />
+	<composite:attribute name="labelEscape" default="false" />
+	<composite:attribute name="styleClass" />
+	<composite:attribute name="errorClass" default="error" />
+	<composite:attribute name="maxlength" />
+	<composite:attribute name="required" default="false" />
+	<composite:attribute name="requiredMessage" default="REQUIRED" />
+	<composite:attribute name="validatorMessage"
+		default="VALIDATION FAILED. SIZE GREATER THAN MAXLENGTH #{cc.attrs.maxlength} " />
+	<composite:attribute name="converterMessage"
+		default="CONVERSION FAILED" />
+	<composite:attribute name="renderMessage" default="true" />
+	<composite:clientBehavior name="change" event="change"
+		targets="textArea" />
+	<composite:editableValueHolder name="textArea" targets="textArea" />
+</composite:interface>
+
+<composite:implementation>
+
+
+	<h:outputLabel for="textArea" value="#{cc.attrs.label}"
+		escape="#{cc.attrs.labelEscape}" styleClass="#{cc.attrs.labelClass}">
+		<h:message id="textAreaError" for="textArea" escape="false"
+			errorClass="#{cc.attrs.errorClass}" />
+	</h:outputLabel>
+	<div>
+		<h:inputTextarea id="textArea" required="#{cc.attrs.required}"
+			styleClass="#{cc.attrs.styleClass}"
+			requiredMessage="#{cc.attrs.requiredMessage}"
+			value="#{cc.attrs.value}" cols="#{cc.attrs.cols}"
+			rows="#{cc.attrs.rows}"
+			validatorMessage="#{cc.attrs.validatorMessage}">
+			<f:validateLength maximum="#{cc.attrs.maxlength}"
+				disabled="#{empty cc.attrs.maxlength}" />
+		</h:inputTextarea>
+	</div>
+
+</composite:implementation>
+
+</html>

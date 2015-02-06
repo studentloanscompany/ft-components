@@ -1,0 +1,60 @@
+/*---- progress ----*/	
+
+.progress li.active span.number { background: url(../images/progress-circles.png) no-repeat 0 0px; }
+
+.progress li.completed span.number ,
+.progress li.completed:hover span.number { 
+	background: url(../images/progress-circles.png) no-repeat 0 -45px;
+	text-indent:0; }
+
+.page-header span.number { background: url(../images/big-blue-circle.png) no-repeat; }
+
+
+/*---- buttons ----*/	
+
+input[type="submit"],
+input.save, 
+input.navigation,
+input.secondary,
+a.button, 
+a.button:visited { background: url(../images/green-butt.jpg) repeat-x; }
+
+a.button:hover { background: #248550; }
+
+input.secondary { background: url(../images/grey-butt.jpg) repeat-x; }
+
+input.prev { background: url(../images/prev-button.jpg) no-repeat top left; }
+
+input.prev:hover { background: url(../images/prev-button.jpg) no-repeat -70px left; }
+
+input.next { background: url(../images/next-button.jpg) no-repeat top right; }
+
+input.next:hover { background: url(../images/next-button.jpg) no-repeat -70px right; }
+
+span.number { background: url(../images/progress-circles.png) no-repeat 0 -89px; }
+
+fieldset.nationality  .radioButtonDiv input  {
+	display: inline;
+	margin:5px 10px -20px 0px;
+	float: left;
+}
+
+/*---- exit page pdfs ----*/		
+
+.info,
+.pdf-dl,
+#dsaSummary { outline:none; }
+
+#footer .inner{
+    /*REQUIRES IE8 fix for multiple background images - if we want both images to show in IE8*/
+    background: url("../images/sfe_abbrv.png") no-repeat scroll 95% 100% transparent;
+    margin: 0 auto;
+    padding: 1.5em 1em;
+    position: relative;
+    width: 900px;}
+
+#footer .hiddenImage {
+    visibility: visible;
+    display:inline;
+    float:left;
+}

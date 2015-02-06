@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<html
+	 xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:dig="http://java.sun.com/jsf/composite/components/dig"
+	xmlns:lara="http://java.sun.com/jsf/composite/components/lara"
+	xmlns:cmp="http://java.sun.com/jsf/composite/components">
+		
+	<h:head>
+		<title><ui:insert name="title">DEFAULT TITLE.  PLEASE IMPLEMENT ME</ui:insert></title>		
+		<h:outputStylesheet name="global.css" library="css"/>
+		<h:outputStylesheet name="dgv.css" library="css/dgv/styles"/>
+		
+		<h:outputScript library="js" name="jquery-1.7.2.js" />			
+	</h:head>
+	
+	<h:body>
+	
+		<div id="content">
+			<div class="page-header group" id="skip">
+				<h1>
+					<ui:insert name="pageHeader" />
+				</h1>
+			</div>
+			<ui:insert name="content" />
+		</div>
+		
+						
+	</h:body>
+	
+</html>

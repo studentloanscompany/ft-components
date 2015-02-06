@@ -1,0 +1,20 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:composite="http://java.sun.com/jsf/composite"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:slc="http://java.sun.com/jsf/composite/slc"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:ft="http://java.sun.com/jsf/composite/components/ft">
+
+	<composite:interface>		
+		<composite:attribute name="value"/>
+		<composite:attribute name="messages"/>
+	</composite:interface>
+	
+	<composite:implementation>
+			<ft:errorMessage messages="#{cc.attrs.messages}" key="#{cc.id}" />
+			<h:selectManyCheckbox layout="pageDirection" value="#{cc.attrs.value}" class="inline-labels" id="checkBox">
+				<composite:insertChildren/>
+			</h:selectManyCheckbox>
+	</composite:implementation>
+</html>							

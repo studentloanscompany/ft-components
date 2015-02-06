@@ -1,0 +1,39 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:composite="http://java.sun.com/jsf/composite">
+
+<composite:interface>
+	<composite:attribute name="label" />
+	<composite:attribute name="value" />
+	<composite:attribute name="errorClass" default="error" />	
+	<composite:attribute name="messages" />
+	<composite:attribute name="maxlength" default="12" />
+	<composite:attribute name="requiredMessage" default="This field is required" />
+	<composite:attribute name="converterMessage" default="This field must be a number" />
+	<composite:clientBehavior name="change" event="change" targets="currency" />
+	<composite:editableValueHolder name="currency" targets="currency" />
+
+</composite:interface>
+
+<composite:implementation>
+
+	<h:outputLabel for="currency" value="#{cc.attrs.label}">
+		<h:message for="currency" errorClass="#{cc.attrs.errorClass}" />
+	</h:outputLabel>
+	
+	<div>
+		<b>
+			<h:outputText value="£" />
+		</b>
+		<h:inputText id="currency" value="#{cc.attrs.value}"
+			maxlength="#{cc.attrs.maxlength}" required="true"
+			requiredMessage="#{cc.attrs.requiredMessage}"
+			converterMessage="#{cc.attrs.converterMessage}">
+			<f:convertNumber type="number" maxFractionDigits="2"  />
+		</h:inputText>
+	</div>
+	
+</composite:implementation>
+
+</html>

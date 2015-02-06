@@ -1,0 +1,115 @@
+/* $Id: ie.css 124563 2013-04-10 15:03:02Z middlem $ */
+
+@charset "utf-8";
+
+/* CSS Document */
+
+/*for the header to work 
+
+#header {
+	margin: 0px 0px 0px 0px;
+	padding: 0px;
+}
+
+#global-header {
+	background-color: #0C0C0C;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 50;
+}*/
+
+/*for the lists to show inline */
+
+.progress {
+	padding-top: 2em;
+	text-align: center;}
+	
+.progress ol li {
+	display: inline;
+	margin-left: 0;}
+
+.progress li span,
+.progress li a {
+	display: inline;
+	margin-left: 0;
+	padding: 0.25em 2em 0.25em 0.5em;}
+
+.progress li span.number { border-radius: 0;}
+
+#footer ul li { display: inline;}
+
+.done h3,
+.done p.answer {
+	display: inline;
+	float: left; }
+
+.done p.undo { display: inline;  }
+
+.hearder { 
+	width: 710px;  
+	margin: auto; }
+
+/*.done-questions {
+	width: 900px;  
+	margin: auto; }*/
+
+.current { 
+	width: 710px; 
+	margin: auto; }
+
+fieldset.nationality  .radioButtonDiv input  {
+	display: inline;
+	margin:5px 10px -20px 0px;
+	float: left;
+}
+
+
+/*---------------------PROGRESS INDICATOR-------------------------------
+.section {
+	width:800px;
+	overflow:hidden;}
+
+#footer .nav ul {
+	width:800px;
+	overflow:hidden;}
+*/
+
+
+/*---------------------layout ---------------------------------
+
+.step {width: 710px; margin: 0 auto; }
+.done-questions { width: 1000px;}
+li.done {background-color: #cce0d5;}*/
+
+/* Alternative to Standard layout for IE7 and below */
+
+.done-questions { overflow: hidden }
+
+.done-questions h3,
+.done-questions .answer,
+.done-questions .undo {
+	display: inline;
+	zoom: 1;}
+
+.done-questions h3 { 
+	width: 48%; 
+	padding: 0 1%; }
+
+.done-questions .answer { width: 31%; }
+.done-questions .undo { width: 15%; }
+
+
+/* Fixes IE Button padding */
+
+.answer-button, 
+input[type=submit] {
+	clear: left;
+	display: inline-block;
+	float: left;
+	padding: 6px 8px;
+	overflow: visible;
+	width: auto; }
+	
+	/*----------- next steps page -------*/
+.nextsteps ol {list-style-type:disc !important;
